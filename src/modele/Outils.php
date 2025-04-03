@@ -282,6 +282,18 @@ class Outils
 		if ( preg_match($EXPRESSION, $numTelAvalider) || $numTelAvalider == "" ) return true; else return false;
 	}
 
+    // La fonction estUnMdpValide($unMdp) fournit true si le mot de passe reçu en paramètre est correct
+    // (au moins 8 caractères, au moins une minuscule, une majuscule et un chiffre), false sinon
+    public static function estUnMdpValide($unMdp) {
+
+        // utilisation d'une expression régulière pour vérifier un mot de passe
+        // le mot de passe doit comporter au moins 8 caractères, au moins une minuscule, une majuscule et un chiffre
+        $EXPRESSION = "#^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$#";
+
+        // on retourne true si le mot de passe est bon, false sinon
+        if ( preg_match($EXPRESSION, $unMdp) ) return true; else return false;
+    }
+
 } // fin de la classe Outils
 
 // ATTENTION : on ne met pas de balise de fin de script pour ne pas prendre le risque

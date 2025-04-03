@@ -35,9 +35,10 @@ else {
             include_once ('vues/VueChangerDeMdp.php');
         }
         else {
-            if ( strlen($nouveauMdp) < 8 ) {
+            include_once ('modele/Outils.php');
+            if ( !Outils::estUnMdpValide($nouveauMdp) ) {
                 // si le mot de passe a moins de 8 caractères, réaffichage de la vue avec un message explicatif
-                $message = 'Le mot de passe doit comporter au moins 8 caractères !';
+                $message = 'Le mot de passe doit comporter au moins 8 caractères, dont au moins une lettre minuscule, une lettre majuscule et un chiffre !';
                 $typeMessage = 'avertissement';
                 $themeFooter = $themeProbleme;
                 include_once ('vues/VueChangerDeMdp.php');
@@ -78,6 +79,7 @@ else {
                         }
                         else {
                             // tout a bien fonctionné
+                            $_SESSION['mdp'] = $nouveauMdp;	// on met à jour le mot de passe dans la session
                             $message = "Enregistrement effectué.<br>Vous allez recevoir un mail de confirmation.";
                             $typeMessage = 'information';
                             $themeFooter = $themeNormal;
